@@ -5,7 +5,7 @@ package { 'nginx':
 }
 
 service {'nginx':
-  ensure  =>  'running',
+  ensure  => 'running',
   require => file_line['ADDING A LOCATION']
 }
 
@@ -21,7 +21,7 @@ file { ['/data', '/data/web_static', '/data/web_static/shared', '/data/web_stati
 file { '/data/web_static/releases/test/index.html':
   ensure  => 'present',
   content => $cont,
-  require =>  Package['nginx']
+  require => Package['nginx']
 }
 
 file { '/data/web_static/current':
@@ -31,6 +31,6 @@ file { '/data/web_static/current':
 }
 
 service {'nginx':
-  ensure  =>  'running',
+  ensure  => 'running',
   require => file_line['ADDING A LOCATION']
 }
