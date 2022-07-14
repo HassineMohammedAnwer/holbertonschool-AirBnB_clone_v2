@@ -4,48 +4,23 @@ package { 'nginx':
   ensure => 'installed',
 }
 
-service {'nginx':
-  ensure  => 'running',
-  require => file_line['ADDING A LOCATION']
-}
-
 $cont = '<html>\n  <head>\n  </head>\n  <body>\n    Holberton School\n  </body>\n</html>'
 
-file { '/data':
-  ensure  => 'directory',
-  owner   => 'ubuntu',
-  group   => 'ubuntu',
-  mode   => '0777',
+-> exec {'folder':
+  command => '/usr/bin/env mkdir -p /data/web_static/releases/test/',
 }
-
-file { '/data/web_static':
-  ensure  => 'directory',
-  owner   => 'ubuntu',
-  group   => 'ubuntu',
-  mode   => '0751',
+-> exec {'own':
+  command => '/usr/bin/env chown -R ubuntu:ubuntu /data',
 }
-
-file { ['/data/web_static/shared', '/data/web_static/releases', '/data/web_static/releases/test']:
-  ensure  => 'directory',
-  owner   => 'ubuntu',
-  group   => 'ubuntu',
-  mode   => '0751',
+-> exec {'folderr':
+  command => '/usr/bin/env mkdir -p /data/web_static/shared/',
 }
-
-file { '/data/web_static/current':
-  ensure => 'link',
-  target => '/data/web_static/releases/test',
-  mode   => '0777',
-  force  => true
+-> exec {'ech':
+  command => '/usr/bin/env echo $cont > /data/web_static/releases/test/index.html',
 }
-
-file { '/data/web_static/releases/test/index.html':
-  ensure  => 'present',
-  content => $cont,
-  require => Package['nginx']
+-> exec {'lnking':
+  command => '/usr/bin/env ln -sf /data/web_static/releases/test /data/web_static/current',
 }
-
-service {'nginx':
-  ensure  => 'running',
-  require => file_line['ADDING A LOCATION']
+-> exec {'restrating':
+  command => '/usr/bin/env service nginx restart',
 }
