@@ -22,7 +22,7 @@ exec {'lnking':
   command => '/usr/bin/env ln -sf /data/web_static/releases/test /data/web_static/current',
 }
 
-$cont2 ='\'38i\\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t\tautoindex off;\n\t}\n\'
+$cont2 ='\'38i\\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t\tautoindex off;\n\t}\n\''
 
 exec {'serverr':
   provider => shell,
