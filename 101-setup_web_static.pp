@@ -30,7 +30,7 @@ exec {'serverr':
 
 $temp = '/listen 80 default_server/a location /hbnb_static/ { alias /data/web_static/current/;}'
 exec {'servearr':
-  command => '/usr/bin/env sed -i "$temp" /etc/nginx/sites-available/default',
+  command => '/usr/bin/env echo -e "$temp" | sudo tee /etc/nginx/sites-available/default',
 }
 exec {'restrating':
   command => '/usr/bin/env service nginx restart',
