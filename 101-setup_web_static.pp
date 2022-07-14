@@ -2,52 +2,44 @@
 
 $cont = '<html>\n  <head>\n  </head>\n  <body>\n    Holberton School\n  </body>\n</html>'
 
-exec {'install Nginx':
+exec {'get ngnx':
   provider => shell,
   command  => 'sudo apt-get -y install nginx',
-  before   => Exec['start Nginx'],
 }
 
-exec {'start Nginx':
+exec {'startinx':
   provider => shell,
   command  => 'sudo service nginx start',
-  before   => Exec['create first directory'],
 }
 
-exec {'create first directory':
+exec {'folder making':
   provider => shell,
   command  => 'sudo mkdir -p /data/web_static/releases/test/',
-  before   => Exec['create second directory'],
 }
 
 exec {'create second directory':
   provider => shell,
   command  => 'sudo mkdir -p /data/web_static/shared/',
-  before   => Exec['content into html'],
 }
 
 exec {'content into html':
   provider => shell,
   command  => 'echo "$cont" | sudo tee /data/web_static/releases/test/index.html',
-  before   => Exec['symbolic link'],
 }
 
 exec {'symbolic link':
   provider => shell,
   command  => 'sudo ln -sf /data/web_static/releases/test/ /data/web_static/current',
-  before   => Exec['put location'],
 }
 
-exec {'put location':
+exec {'location put':
   provider => shell,
   command  => 'sudo sed -i \'38i\\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t\tautoindex off;\n\t}\n\' /etc/nginx/sites-available/default',
-  before   => Exec['restart Nginx'],
 }
 
-exec {'restart Nginx':
+exec {'restartinx':
   provider => shell,
   command  => 'sudo service nginx restart',
-  before   => File['/data/']
 }
 
 file {'/data/':
