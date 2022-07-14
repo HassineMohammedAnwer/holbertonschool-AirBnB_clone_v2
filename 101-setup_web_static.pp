@@ -15,6 +15,7 @@ file { ['/data', '/data/web_static', '/data/web_static/shared', '/data/web_stati
   ensure  => 'directory',
   owner   => 'ubuntu',
   group   => 'ubuntu',
+  mode   => '777',
   require =>  Package['nginx']
 }
 
