@@ -22,11 +22,11 @@ exec {'lnking':
   command => '/usr/bin/env ln -sf /data/web_static/releases/test /data/web_static/current',
 }
 
-$cont2 ='\'38i\\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t\tautoindex off;\n\t}\n\' /etc/nginx/sites-available/default'
+$cont2 ='\'38i\\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t\tautoindex off;\n\t}\n\'
 
 exec {'serverr':
   provider => shell,
-  command  => 'sudo sed -i $cont2',
+  command  => 'sudo sed -i $cont2 /etc/nginx/sites-available/default',
   before   => Exec['restrating'],
 }
 
