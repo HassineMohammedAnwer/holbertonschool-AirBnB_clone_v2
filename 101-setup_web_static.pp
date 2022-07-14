@@ -25,7 +25,7 @@ exec {'lnking':
 $cont2 = '\nserver {\n	listen 80 default_server;\n	server_name _;\n	location / {\n		try_files \$uri \$uri/ =404;\n	}\n	location /hbnb_static {\n		alias /data/web_static/current;\n		index index.html;\n		try_files \$uri \$uri /hbnb_static/index.html;\n	}\n}\n'
 
 exec {'serverr':
-  command => '/usr/bin/env echo -e "$cont2" | sudo tee /etc/nginx/sites-available/default',
+  command => '/usr/bin/env sudo echo -e "$cont2" >> /etc/nginx/sites-available/default',
 }
 exec {'restrating':
   command => '/usr/bin/env service nginx restart',
