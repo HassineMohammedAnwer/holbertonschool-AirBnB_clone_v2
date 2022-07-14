@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""  generates a .tgz archive from web_static folder """
+"""Script creates an archive with different name based on date"""
 
 from datetime import datetime
 from fabric.api import local
@@ -7,6 +7,7 @@ import os
 
 def do_pack():
     """ function do_pack """
+
     try:
     time = datetime.utcnow().strftime('%Y%m%d%H%M%S')
     path = "versions/web_static_{}.tgz".format(time)
