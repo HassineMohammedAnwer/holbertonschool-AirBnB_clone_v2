@@ -23,12 +23,6 @@ def C_text(text):
     return 'C {:s}'.format(text.replace('_', ' '))
 
 
-@app.route('/number_template/<int:n>', strict_slashes=False)
-def _number_template(n):
-    """ number_template """
-    return render_template('5-number.html', number=n)
-
-
 @app.route('/python', defaults={'text': 'is cool'}, strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def python_text(text):
@@ -40,6 +34,12 @@ def python_text(text):
 def _number(n):
     """number_route"""
     return '{:d} is a number'.format(n)
+
+
+app.route('/number_template/<int:n>', strict_slashes=False)
+def _number_template(n):
+    """ number_template """
+    return render_template('5-number.html', number=n)
 
 
 if __name__ == "__main__":
