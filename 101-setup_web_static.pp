@@ -6,21 +6,21 @@ package { 'nginx':
 
 $cont = '<html>\n  <head>\n  </head>\n  <body>\n    Holberton School\n  </body>\n</html>'
 
--> exec {'folder':
+exec {'folder':
   command => '/usr/bin/env mkdir -p /data/web_static/releases/test/',
 }
--> exec {'own':
+exec {'own':
   command => '/usr/bin/env chown -R ubuntu:ubuntu /data',
 }
--> exec {'folderr':
+exec {'folderr':
   command => '/usr/bin/env mkdir -p /data/web_static/shared/',
 }
--> exec {'ech':
+exec {'ech':
   command => '/usr/bin/env echo $cont > /data/web_static/releases/test/index.html',
 }
--> exec {'lnking':
+exec {'lnking':
   command => '/usr/bin/env ln -sf /data/web_static/releases/test /data/web_static/current',
 }
--> exec {'restrating':
+exec {'restrating':
   command => '/usr/bin/env service nginx restart',
 }
