@@ -36,4 +36,8 @@ class creation {
     force  => true
   }
 
+  package { 'nginx':
+    ensure => 'installed',
+  }
+
 }
