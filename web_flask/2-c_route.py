@@ -16,10 +16,12 @@ def hbnb():
     """ display hello hbnb on 0.0.0.0 port=5000"""
     return 'HBNB'
 
+
 @app.route('/c/<text>', strict_slashes=False)
 def C_text(text):
     """ /C_text"""
     return 'C {:s}'.format(text.replace('_', ' '))
+
 
 if __name__ == "__main__":
     """ running app.route on 0.0.0.0:5000"""
