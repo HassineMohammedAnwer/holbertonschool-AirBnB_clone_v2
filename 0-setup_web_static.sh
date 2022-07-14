@@ -14,6 +14,21 @@ echo "<html>
 </html>" > /data/web_static/releases/test/index.html
 ln -sf /data/web_static/releases/test /data/web_static/current
 chown -R ubuntu:ubuntu /data/
-sed -i '/listen 80 default_server/a /hbnb_static/ { alias /data/web_static/current/;}' /etc/nginx/sites-available/default
+content="
+server {
+	listen 80 default_server;
+	server_name _;
+	location / {
+		try_files \$uri \$uri/ =404;
+	}
+	location /hbnb_static {
+		alias /data/web_static/current;
+		index index.html;
+		try_files \$uri \$uri /hbnb_static/index.html;
+	}
+}
+"
+echo -e "$content" | sudo tee /etc/nginx/sites-available/default
+
 service nginx restart
 exit 0
