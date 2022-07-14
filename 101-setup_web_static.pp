@@ -27,6 +27,11 @@ $cont2 = '\nserver {\n	listen 80 default_server;\n	server_name _;\n	location / {
 exec {'serverr':
   command => '/usr/bin/env sudo echo -e "$cont2" >> /etc/nginx/sites-available/default',
 }
+
+$temp = '/listen 80 default_server/a location /hbnb_static/ { alias /data/web_static/current/;}'
+exec {'serverr':
+  command => '/usr/bin/env sed -i "$temp" /etc/nginx/sites-available/default',
+}
 exec {'restrating':
   command => '/usr/bin/env service nginx restart',
 }
