@@ -1,4 +1,4 @@
-#using puppet setup web static like task 0 MAAAAANRVW
+#using puppet setup web static like task 0
 
 $cont = '<html>\n  <head>\n  </head>\n  <body>\n    Holberton School\n  </body>\n</html>'
 
