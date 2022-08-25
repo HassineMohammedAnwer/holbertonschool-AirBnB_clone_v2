@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""Script creates an archive with different name based on date"""
+"""Script creates an archive with different name based on date
+ex: web_static_<year><month><day><hour><minute><second>.tgz"""
 
 from datetime import datetime
 from fabric.api import local
